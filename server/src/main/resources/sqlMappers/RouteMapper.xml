@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ut.netty.server.product.mapper.RouteMapper">
+
+	<sql id="BaseColumn">
+		route_id AS routeId,route_name AS routeName, mileage,route_desc AS routeDesc,route_img AS routeImg,
+		resistance_obj AS resistanceObj,coordinate_obj AS coordinateObj,map_img AS mapImg
+	</sql>
+	<select id="findRoutes" parameterType="java.lang.Integer" resultType="java.util.Map">
+		SELECT
+			<include refid="BaseColumn"/>
+		FROM
+			`sc_app_proute`
+		WHERE
+			model =#{model}
+	</select>
+
+	<select id="findDefualtRoute" parameterType="java.lang.Integer" resultType="java.util.Map">
+		SELECT
+			<include refid="BaseColumn"/>
+		FROM
+			`sc_app_proute`
+		WHERE
+			model =#{model}
+		ORDER BY
+		sort ASC
+		LIMIT 1
+	</select>
+
+
+	<select id="findRouteById" parameterType="java.lang.Integer" resultType="java.util.Map">
+		SELECT
+			<include refid="BaseColumn"/>
+		FROM
+			`sc_app_proute`
+		WHERE
+			model =#{model} AND route_id=#{id}
+		LIMIT 1
+	</select>
+
+
+
+</mapper>
